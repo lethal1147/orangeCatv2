@@ -3,7 +3,7 @@ import orangeCat from "@/assets/mascot.png";
 
 export default function HeroSection() {
   return (
-    <section className="mx-auto my-36 flex w-2/3 gap-20">
+    <section id="hero" className="mx-auto my-36 flex w-2/3 gap-20">
       <div className=" flex w-2/3 flex-col justify-center gap-14">
         <h1 className="text-6xl font-bold">Make your exercise fun!</h1>
         <article>
@@ -14,7 +14,7 @@ export default function HeroSection() {
           progress, challenge your friends, and earn achievements all while
           having fun and staying motivated.
         </article>
-        <Button className="h-14 bg-main-orange text-xl font-bold hover:bg-main-orange-20%">
+        <Button className="h-14 bg-main-orange text-xl font-bold shadow-lg hover:bg-main-orange-20%">
           Get Started!
         </Button>
       </div>
