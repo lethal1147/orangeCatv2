@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import orangeCat from "@/assets/mascot.png";
 
 export default function HeroSection() {
@@ -14,9 +14,12 @@ export default function HeroSection() {
           progress, challenge your friends, and earn achievements all while
           having fun and staying motivated.
         </article>
-        <Button className="h-14 bg-main-orange text-xl font-bold shadow-lg hover:bg-main-orange-20%">
+        <Link
+          to="/login"
+          className="bg-main-orange-500 py-3 text-center text-xl font-bold text-white shadow-lg transition-all hover:bg-main-orange-700"
+        >
           Get Started!
-        </Button>
+        </Link>
       </div>
       <div className="w-[450px]">
         <img src={orangeCat} alt="Orange's cat" />

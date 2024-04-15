@@ -3,7 +3,7 @@ import FeatureCard from "./featureCard";
 
 export default function FeatureSection() {
   return (
-    <section id="feature" className="w-full bg-main-orange py-20">
+    <section id="feature" className="w-full bg-main-orange-500 py-20">
       <h2 className="mb-20 text-center text-5xl font-bold text-white">
         Features !
       </h2>
