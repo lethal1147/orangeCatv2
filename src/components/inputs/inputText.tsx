@@ -13,11 +13,14 @@ export default function InputText({
 }: InputTextProps) {
   return (
     <div className="w-full text-gray-text">
-      <label>
-        {label}
-        {required && <strong className=" text-main-red"> *</strong>}
-      </label>
+      {label && (
+        <label htmlFor={label}>
+          {label}
+          {required && <strong className=" text-main-red"> *</strong>}
+        </label>
+      )}
       <Input
+        id={label}
         type={type}
         placeholder={placeholder}
         required={required}
