@@ -1,40 +1,41 @@
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { InputHTMLAttributes, useState } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, useState } from "react";
+import { Input, InputProps } from "../ui/input";
 
-interface InputTextProps extends InputHTMLAttributes<Text> {
-  label: string;
+interface InputTextProps extends InputProps {
+  error?: string | boolean;
+  label?: string;
 }
 
-export default function InputPassword({
-  label,
-  required,
-  placeholder,
-}: InputTextProps) {
-  const [isShow, setIsShow] = useState(false);
-  return (
-    <div className="w-full text-gray-text">
-      <label>
-        {label}
-        {required && <strong className=" text-main-red"> *</strong>}
-      </label>
+const InputPassword = forwardRef<HTMLInputElement, InputTextProps>(
+  ({ ...props }, ref) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
+
+    return (
       <div className="relative">
-        <input
-          type={isShow ? "text" : "password"}
-          placeholder={placeholder}
-          required={required}
-          className={cn(
-            "flex h-10 w-full rounded border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-stroke placeholder:text-muted-foreground focus:outline-0 focus:ring-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-orange-500 disabled:cursor-not-allowed disabled:opacity-50",
-          )}
+        <Input
+          {...props}
+          className="w-full border-none shadow-none outline-none placeholder:text-gray-stroke"
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          ref={ref}
         />
         <button
           type="button"
-          className=" absolute right-3 top-2 text-2xl outline-none"
-          onClick={() => setIsShow(!isShow)}
+          onClick={togglePasswordVisibility}
+          className="absolute right-2.5 top-2.5 text-gray-stroke focus:outline-none"
         >
-          {isShow ? <IoEye className="" /> : <IoEyeOff />}
+          {showPassword ? <IoEye size={22} /> : <IoEyeOff size={22} />}
         </button>
       </div>
-    </div>
-  );
-}
+    );
+  },
+);
+
+InputPassword.displayName = "InputPassword";
+
+export default InputPassword;
