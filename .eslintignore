@@ -1,3 +1,5 @@
 src/components/ui/*
-src/lib/*
+src/lib/**/*.tsx
+src/lib/**/*.ts
 **/*.css
+src/**/*.css

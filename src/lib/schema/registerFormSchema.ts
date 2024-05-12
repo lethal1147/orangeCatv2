@@ -6,8 +6,10 @@ const registrationSchema = z
     username: z
       .string()
       .min(4, { message: "Username must be at least 4 characters long" }),
+    firstName: z.string(),
+    lastName: z.string(),
     email: z.string().email({ message: "Invalid email address" }),
-    gender: z.enum(["male", "female", "etc"]),
+    gender: z.enum(["m", "f", "p"]),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long" })
