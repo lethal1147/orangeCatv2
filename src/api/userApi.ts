@@ -5,6 +5,7 @@ import { LoginSchemaType } from "@/lib";
 const urls = {
   login: `${endpoints.user}/login`,
   registerUrl: `${endpoints.user}/create`,
+  getOne: `${endpoints.user}/getOne`,
 };
 
 export const register = (body: FormData) =>
@@ -12,3 +13,5 @@ export const register = (body: FormData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 export const login = (body: LoginSchemaType) => api.post(urls.login, body);
+export const getOneById = (userId: string, options = {}) =>
+  api.get(`${urls.getOne}/${userId}`, options);

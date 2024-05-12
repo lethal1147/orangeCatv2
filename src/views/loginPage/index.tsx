@@ -20,30 +20,22 @@ import {
 } from "@/components/ui/form";
 import { LoginSchemaType, loginSchema } from "@/lib/schema/loginFormSchema";
 import { Input } from "@/components/ui/input";
-import { createAlert, createAlertError } from "@/lib";
-import { withAsync } from "@/utils";
-import { login } from "@/api";
+import { createAlertError } from "@/lib";
 import { useApi } from "@/hooks";
 import { apiStatus } from "@/constants";
+import useAuthStore from "@/stores/authStore";
 
 export default function LoginPage() {
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
   });
+  const { loginHandler } = useAuthStore();
   const { isPending, setStatus } = useApi(apiStatus.idle);
 
   const submit = async (values: LoginSchemaType) => {
     try {
       setStatus(apiStatus.pending);
-      const { response, error } = await withAsync(() => login(values));
-      if (error) throw new Error(error);
-
-      const result = await createAlert({
-        icon: "success",
-        title: response.message,
-        timer: 3000,
-      });
-      console.log(result);
+      await loginHandler(values);
       setStatus(apiStatus.success);
     } catch (err) {
       setStatus(apiStatus.error);
