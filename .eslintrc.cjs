@@ -69,5 +69,6 @@ module.exports = {
     "no-underscore-dangle": ["error", { allow: ["_id"] }],
     "react/react-in-jsx-scope": "off",
     "import/extensions": "off",
+    "react/jsx-props-no-spreading": "off",
   },
 };

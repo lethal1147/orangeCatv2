@@ -3,7 +3,7 @@ import HowItWorkCard from "./howItWorkCard";
 
 export default function HowItWorkSection() {
   return (
-    <section id="how" className="w-full bg-main-orange py-20">
+    <section id="how" className="w-full bg-main-orange-500 py-20">
       <h2 className="mb-20 text-center text-5xl font-bold text-white">
         How it Work!
       </h2>

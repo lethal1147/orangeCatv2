@@ -1,13 +1,8 @@
-import { Route, Routes } from "react-router-dom";
-import { LandingPage } from "./views";
 import "./App.css";
+import { UnAuthenRoute } from "./routes";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="*" element={<LandingPage />} />
-    </Routes>
-  );
+  return <UnAuthenRoute />;
 }
 
 export default App;
