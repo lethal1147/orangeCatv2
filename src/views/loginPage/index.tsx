@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { createAlertError } from "@/lib";
 import { useApi } from "@/hooks";
 import { apiStatus } from "@/constants";
-import useAuthStore from "@/stores/authStore";
+import { useAuthStore } from "@/stores";
 
 export default function LoginPage() {
   const form = useForm<LoginSchemaType>({

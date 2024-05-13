@@ -1,12 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LoginSchemaType, createAlert } from "@/lib";
+import { LoginSchemaType, createAlert, decodeToken } from "@/lib";
 import { withAsync } from "@/utils";
-import { login } from "@/api";
-import { createNewCookies, getCookies, setCookies } from "@/services";
+import { getOneUserById, login, logout } from "@/api";
+import { createNewCookies, setCookies } from "@/services";
+import { UserDataTypePopulate } from "@/types";
 
 interface AuthStore {
   isLoggedIn: boolean;
+  userData: UserDataTypePopulate | null;
   loginHandler: (payload: LoginSchemaType) => Promise<void>;
   logoutHandler: () => void;
 }
@@ -16,6 +18,7 @@ const useAuthStore = create(
   persist<AuthStore>(
     (set) => ({
       isLoggedIn: false,
+      userData: null,
       loginHandler: async (payload: LoginSchemaType) => {
         const { response, error } = await withAsync(() => login(payload));
         if (error) throw new Error(error);
@@ -36,12 +39,16 @@ const useAuthStore = create(
           title: response.message,
           timer: 3000,
         });
-
-        set({ isLoggedIn: false });
+        const decodedToken = decodeToken(accessToken);
+        const {
+          response: { user },
+        } = await withAsync(() => getOneUserById(decodedToken.userId));
+        set({ isLoggedIn: true, userData: user });
       },
-      logoutHandler: () => {
-        const accessToken = getCookies(cookies, "accessToken");
-        console.log(accessToken);
+      logoutHandler: async () => {
+        await logout();
+        localStorage.removeItem("refreshToken");
+        set({ isLoggedIn: false });
       },
     }),
     {

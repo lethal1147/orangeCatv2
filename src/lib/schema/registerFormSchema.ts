@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { GENDER_ENUMS } from "@/constants";
 
-const registrationSchema = z
+export const registrationSchema = z
   .object({
     profileImage: z.instanceof(File).optional(),
     username: z
@@ -9,7 +10,7 @@ const registrationSchema = z
     firstName: z.string(),
     lastName: z.string(),
     email: z.string().email({ message: "Invalid email address" }),
-    gender: z.enum(["m", "f", "p"]),
+    gender: z.enum(GENDER_ENUMS),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long" })
@@ -40,4 +41,4 @@ const registrationSchema = z
     path: ["confirmPassword"],
   });
 
-export default registrationSchema;
+export type RegistrationSchemaType = z.infer<typeof registrationSchema>;

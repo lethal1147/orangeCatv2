@@ -4,6 +4,7 @@ import { LoginSchemaType } from "@/lib";
 
 const urls = {
   login: `${endpoints.user}/login`,
+  logout: `${endpoints.user}/logout`,
   registerUrl: `${endpoints.user}/create`,
   getOne: `${endpoints.user}/getOne`,
 };
@@ -13,5 +14,6 @@ export const register = (body: FormData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 export const login = (body: LoginSchemaType) => api.post(urls.login, body);
-export const getOneById = (userId: string, options = {}) =>
+export const logout = () => api.get(urls.logout, { withCredentials: true });
+export const getOneUserById = (userId: string, options = {}) =>
   api.get(`${urls.getOne}/${userId}`, options);

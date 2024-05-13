@@ -1,8 +1,10 @@
 import "./App.css";
-import { UnAuthenRoute } from "./routes";
+import { AuthenRoutes, UnAuthenRoute } from "./routes";
+import { useAuthStore } from "./stores";
 
 function App() {
-  return <UnAuthenRoute />;
+  const { isLoggedIn } = useAuthStore();
+  return isLoggedIn ? <AuthenRoutes /> : <UnAuthenRoute />;
 }
 
 export default App;
