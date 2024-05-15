@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuthStore } from "@/stores";
+import { renderBase64AsSrc } from "@/utils";
 
 export default function AuthenNav() {
   const { logoutHandler, userData } = useAuthStore();
@@ -28,7 +29,10 @@ export default function AuthenNav() {
             <DropdownMenuTrigger className="cursor-pointer" asChild>
               <Avatar>
                 <AvatarImage
-                  src={`data:${userData?.profileImageId.imageType};base64,${userData?.profileImageId.image}`}
+                  src={renderBase64AsSrc(
+                    userData?.profileImageId.image || "",
+                    userData?.profileImageId.imageType || "",
+                  )}
                   alt="@shadcn"
                 />
                 <AvatarFallback className="font-bold text-main-orange-300">

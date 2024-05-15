@@ -33,3 +33,7 @@ export async function withAsync(fn: () => Promise<any>) {
 export function createOptionValueKey(arr: [], key: string, value: string) {
   return arr.map((item) => ({ label: item[key], value: item[value] }));
 }
+
+export function renderBase64AsSrc(base64: string, mimetype: string) {
+  return `data:${mimetype};base64,${base64}`;
+}

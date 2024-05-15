@@ -27,6 +27,16 @@ export interface UserProfileImageType {
   _id: string;
 }
 
+export interface UserProfileStyleType {
+  _id: string;
+  coverImageId: {
+    _id: string;
+    image: string;
+    imageType: string;
+  };
+}
+
 export interface UserDataTypePopulate extends UserDataType {
   profileImageId: UserProfileImageType;
+  profileStyleId: UserProfileStyleType;
 }

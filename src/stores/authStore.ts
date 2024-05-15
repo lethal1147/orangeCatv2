@@ -11,6 +11,7 @@ interface AuthStore {
   userData: UserDataTypePopulate | null;
   loginHandler: (payload: LoginSchemaType) => Promise<void>;
   logoutHandler: () => void;
+  updateUserData: (userId: string) => Promise<void>;
 }
 const cookies = createNewCookies();
 
@@ -49,6 +50,12 @@ const useAuthStore = create(
         await logout();
         localStorage.removeItem("refreshToken");
         set({ isLoggedIn: false });
+      },
+      updateUserData: async (userId: string) => {
+        const {
+          response: { user },
+        } = await withAsync(() => getOneUserById(userId));
+        set({ userData: user });
       },
     }),
     {

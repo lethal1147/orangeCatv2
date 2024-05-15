@@ -11,7 +11,7 @@ import { AuthenLayout } from "@/layouts";
 export default function AuthenRoutes() {
   return (
     <Routes>
-      <Route path="*" element={<Navigate to="/dashboard" />} />
+      <Route path="*" element={<Navigate to="/home" />} />
       <Route element={<AuthenLayout />}>
         <Route path="/home" element={<FeedPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />

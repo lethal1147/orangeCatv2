@@ -29,6 +29,9 @@ const SIDEBAR_MENUS: MenuItemType[] = [
     icon: <UserIcon />,
     id: "profile",
     path: "/profile",
+    state: {
+      mode: "self",
+    },
   },
   {
     icon: <DumbbellIcon />,
@@ -65,7 +68,9 @@ export default function SidebarMenu() {
             asChild
             key={menu.id}
           >
-            <Link to={menu.path}>{menu.icon}</Link>
+            <Link state={menu.state} to={menu.path}>
+              {menu.icon}
+            </Link>
           </Button>
         ))}
       </div>
