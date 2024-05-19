@@ -1,10 +1,11 @@
 // eslint-disable-next-line object-curly-newline
 import {
-  DumbbellIcon,
+  // DumbbellIcon,
   HomeIcon,
   LayoutDashboard,
   StarIcon,
   UserIcon,
+  Users,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -34,9 +35,9 @@ const SIDEBAR_MENUS: MenuItemType[] = [
     },
   },
   {
-    icon: <DumbbellIcon />,
-    id: "activity",
-    path: "/activity",
+    icon: <Users />,
+    id: "friend",
+    path: "/friend",
   },
   {
     icon: <StarIcon />,

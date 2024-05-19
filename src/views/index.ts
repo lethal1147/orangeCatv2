@@ -6,3 +6,4 @@ export { default as DashboardPage } from "./dashboardPage";
 export { default as ProfilePage } from "./profilePage";
 export { default as ActivityPage } from "./activityPage";
 export { default as LeaderboardPage } from "./leaderboardPage";
+export { default as FriendPage } from "./friendPage";

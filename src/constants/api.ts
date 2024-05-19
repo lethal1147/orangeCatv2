@@ -13,4 +13,5 @@ export const apiStatus: ApiStatusObjectType = {
 
 export const endpoints = {
   user: "user",
+  friend: "friend",
 };

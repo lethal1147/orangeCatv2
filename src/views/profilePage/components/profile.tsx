@@ -21,7 +21,7 @@ export default function Profile({ user }: ProfilePropsType) {
       setProfileData(userData);
     }
   }, [user]);
-
+  console.log(mode);
   return (
     <section className=" w-full">
       <ProfileHeader mode={mode} />

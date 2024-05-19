@@ -1,8 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
-  ActivityPage,
+  // ActivityPage,
   DashboardPage,
   FeedPage,
+  FriendPage,
   LeaderboardPage,
   ProfilePage,
 } from "@/views";
@@ -16,7 +17,8 @@ export default function AuthenRoutes() {
         <Route path="/home" element={<FeedPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/activity" element={<ActivityPage />} />
+        {/* <Route path="/activity" element={<ActivityPage />} /> */}
+        <Route path="/friend" element={<FriendPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Route>
     </Routes>

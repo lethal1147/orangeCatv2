@@ -13,6 +13,8 @@ import { useApi } from "@/hooks";
 import { apiStatus } from "@/constants";
 import { Loader } from "@/components";
 import { useAuthStore } from "@/stores";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 type ProfileHeaderPropsType = {
   mode: string;
@@ -23,6 +25,7 @@ export default function ProfileHeader({ mode }: ProfileHeaderPropsType) {
   const { profileData, setProfileData } = useProfileStore();
   const { updateUserData } = useAuthStore();
   const { setStatus, isPending } = useApi();
+  const { toast } = useToast();
   const isSelf = mode === "self";
 
   const onChangeCoverImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +45,11 @@ export default function ProfileHeader({ mode }: ProfileHeaderPropsType) {
         setProfileData(user);
         updateUserData(user._id);
         setStatus(apiStatus.success);
+        toast({
+          duration: 3000,
+          title: "Update cover image successfully.",
+          description: "You profile have been updated.",
+        });
       } catch (err) {
         createAlertError(err as Error, "Failed to update cover image");
         setStatus(apiStatus.error);
@@ -52,27 +60,32 @@ export default function ProfileHeader({ mode }: ProfileHeaderPropsType) {
   return (
     <div className="relative h-[340px] w-full">
       {isPending && <Loader />}
+      <Toaster />
       <Avatar className="absolute left-10 top-[175px] z-20 size-40 border-4 border-white">
         <AvatarImage
           src={renderBase64AsSrc(
-            profileData?.profileImageId.image || "",
-            profileData?.profileImageId.imageType || "",
+            profileData?.profileImageId?.image || "",
+            profileData?.profileImageId?.imageType || "",
           )}
         />
         <AvatarFallback>{profileData?.firstName[0]}</AvatarFallback>
       </Avatar>
       <div className="group/item absolute top-0 h-[200px] w-full overflow-hidden transition-all">
-        <img
-          className="w-full"
-          src={
-            coverImage ||
-            renderBase64AsSrc(
-              profileData?.profileStyleId.coverImageId.image || "",
-              profileData?.profileStyleId.coverImageId.imageType || "",
-            )
-          }
-          alt="user's cover"
-        />
+        {coverImage ? (
+          <img
+            className="w-full"
+            src={
+              coverImage ||
+              renderBase64AsSrc(
+                profileData?.profileStyleId?.coverImageId?.image || "",
+                profileData?.profileStyleId?.coverImageId?.imageType || "",
+              )
+            }
+            alt="user's cover"
+          />
+        ) : (
+          <div className="size-full h-[200px] bg-gray-text" />
+        )}
         <Label
           htmlFor="file"
           className="group/item invisible absolute bottom-4 right-4 z-30 cursor-pointer rounded-md bg-white px-5 py-3 text-gray-text transition-all hover:bg-gray-stroke group-hover/item:visible"
