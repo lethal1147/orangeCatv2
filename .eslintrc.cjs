@@ -58,6 +58,7 @@ module.exports = {
     "jsx-a11y/label-has-for": "off",
     "react/require-default-props": "off",
     indent: "off",
+    "@typescript-eslint/indent": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/prop-types": 0,
     "linebreak-style": "off",

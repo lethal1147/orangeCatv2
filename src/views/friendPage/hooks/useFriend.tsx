@@ -9,8 +9,10 @@ export default function useFriend() {
     [],
   );
   const [friendRequestList, setFriendRequestList] = useState<
-  FriendRequestTypePopulate[]
+    FriendRequestTypePopulate[]
   >([]);
+  const [isSuggestPending, setIsSuggestPending] = useState(true);
+  const [isFriendPending, setIsFriendPending] = useState(true);
 
   const getSuggestList = async (userId: string) => {
     try {
@@ -21,8 +23,10 @@ export default function useFriend() {
       } = await withAsync(() => getFriendSuggestList(userId));
       if (error) throw new Error(error);
       setSuggestionList(suggestList);
+      setIsSuggestPending(false);
     } catch (err) {
       createAlertError(err as Error, "Failed to get friend suggestion list.");
+      setIsSuggestPending(false);
     }
   };
 
@@ -32,17 +36,23 @@ export default function useFriend() {
         response: { friendRequest },
         error,
       } = await withAsync(() => getFriendRequestList(userId));
-      setFriendRequestList(friendRequest);
       if (error) throw new Error(error);
+      setFriendRequestList(friendRequest);
+      setIsFriendPending(false);
     } catch (err) {
       createAlertError(err as Error, "Failed to get friend request.");
+      setIsFriendPending(false);
     }
   };
+
+  // const acceptRequest = async () => {};
 
   return {
     getSuggestList,
     getFriendRequest,
     suggestionList,
     friendRequestList,
+    isSuggestPending,
+    isFriendPending,
   };
 }
